@@ -1,0 +1,137 @@
+.section {
+  padding-bottom: 0.5rem;
+}
+
+.title {
+  margin: 0 0 0.85rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.button {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.button:hover .row {
+  background: rgba(167, 139, 250, 0.08);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0.35rem 1rem;
+  transition: background 0.2s ease;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: contain;
+}
+
+.day {
+  flex: 0 0 5.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.desc {
+  flex: 1;
+  text-align: left;
+  text-transform: capitalize;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.range {
+  flex-shrink: 0;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+}
+
+.panel {
+  padding: 0 1rem 1rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.grid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem 1rem;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.cell dt {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cell dd {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 520px) {
+  .row {
+    flex-wrap: wrap;
+    padding: 0.65rem 1rem;
+  }
+
+  .day {
+    flex: 1 1 auto;
+  }
+
+  .desc {
+    flex-basis: 100%;
+    order: 1;
+    padding-left: 3.5rem;
+  }
+
+  .range {
+    margin-left: auto;
+  }
+}

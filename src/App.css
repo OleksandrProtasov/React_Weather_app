@@ -1,4 +1,138 @@
-.container {
-  max-width: 100%;
-  margin: 20px auto;
+.app {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  padding-bottom: 3rem;
+}
+
+.app__glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app__glow--one {
+  width: min(520px, 80vw);
+  height: min(520px, 80vw);
+  top: -120px;
+  right: -80px;
+  background: radial-gradient(
+    circle,
+    var(--accent-violet) 0%,
+    transparent 70%
+  );
+}
+
+.app__glow--two {
+  width: min(480px, 75vw);
+  height: min(480px, 75vw);
+  bottom: -100px;
+  left: -100px;
+  background: radial-gradient(
+    circle,
+    var(--accent-cyan) 0%,
+    transparent 70%
+  );
+}
+
+.app__header {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto 1.75rem;
+}
+
+.app__brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.app__logo {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    var(--accent-violet),
+    var(--accent-cyan)
+  );
+  color: var(--bg-deep);
+  font-size: 1.35rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-soft);
+}
+
+.app__title {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.app__tagline {
+  margin: 0.15rem 0 0;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.app__main {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.app__search-section {
+  padding: 1rem 1.25rem;
+}
+
+.app__error {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--accent-rose);
+}
+
+.env-warning {
+  max-width: 520px;
+  margin: 4rem auto;
+  padding: 1.75rem;
+}
+
+.env-warning__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+}
+
+.env-warning__text {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.env-warning__text code {
+  font-size: 0.85em;
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-cyan);
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-soft);
 }

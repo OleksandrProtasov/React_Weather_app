@@ -1,0 +1,131 @@
+.card {
+  padding: 1.35rem 1.5rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    rgba(167, 139, 250, 0.12) 0%,
+    transparent 42%,
+    rgba(34, 211, 238, 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+.top,
+.bottom {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.bottom {
+  margin-top: 0.5rem;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.city {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  margin: 0.35rem 0 0;
+  text-transform: capitalize;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.icon {
+  width: 7rem;
+  height: 7rem;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
+}
+
+.temp {
+  margin: 0;
+  font-size: clamp(3rem, 10vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  background: linear-gradient(
+    135deg,
+    var(--text-primary),
+    var(--accent-cyan)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tempUnit {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-left: 0.15rem;
+  vertical-align: super;
+  color: var(--text-muted);
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+.details {
+  flex: 1;
+  min-width: 200px;
+}
+
+.detailsTitle {
+  margin: 0 0 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-fuchsia);
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem 1rem;
+}
+
+.grid li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.muted {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 520px) {
+  .bottom {
+    flex-direction: column;
+  }
+
+  .icon {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+}
