@@ -2,7 +2,7 @@
 
 Weather dashboard with city search, current conditions, hourly timeline, and 7-day overview.
 
-Live demo: [https://johnyfours.github.io/React_Weather_app/](https://johnyfours.github.io/React_Weather_app/)
+Live demo: [[https://johnyfours.github.io/React_Weather_app/](https://oleksandrprotasov.github.io/React_Weather_app/)](https://johnyfours.github.io/React_Weather_app/)
 
 ## What is inside
 
