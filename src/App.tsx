@@ -104,8 +104,10 @@ function App() {
               {error}
             </p>
           )}
-          {currentWeather && <CurrentWeather data={currentWeather} />}
-          {forecast && <Forecast data={forecast} />}
+          <div className="app__dashboard">
+            {currentWeather && <CurrentWeather data={currentWeather} />}
+            {forecast && <Forecast data={forecast} />}
+          </div>
         </main>
       </div>
     </div>
