@@ -1,18 +1,28 @@
 :root {
-  --bg-deep: #070a12;
-  --bg-mid: #0f172a;
-  --accent-violet: #a78bfa;
-  --accent-cyan: #22d3ee;
+  --bg-deep: #0a0618;
+  --bg-mid: #120b24;
+  --card-bg: rgba(18, 18, 20, 0.72);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --accent-violet: #c084fc;
+  --accent-cyan: #38bdf8;
   --accent-fuchsia: #e879f9;
+  --accent-magenta: #f472b6;
+  --accent-sun: #fcd34d;
   --accent-rose: #fb7185;
-  --glass-bg: rgba(15, 23, 42, 0.55);
-  --glass-border: rgba(148, 163, 184, 0.18);
-  --text-primary: #f1f5f9;
-  --text-muted: #94a3b8;
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(255, 255, 255, 0.09);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --radius-xl: 28px;
   --radius-lg: 20px;
   --radius-md: 14px;
-  --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.35);
-  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  --radius-pill: 9999px;
+  --shadow-soft: 0 32px 80px rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 24px 64px rgba(0, 0, 0, 0.45);
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
   font-weight: 400;
   color: var(--text-primary);
@@ -32,21 +42,51 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(
-      1200px 600px at 80% -10%,
-      rgba(167, 139, 250, 0.2),
+  position: relative;
+  overflow-x: hidden;
+  background:
+    radial-gradient(
+      ellipse 140% 80% at 50% 42%,
+      rgba(56, 189, 248, 0.35) 0%,
+      rgba(192, 132, 252, 0.22) 28%,
+      rgba(244, 114, 182, 0.18) 52%,
+      transparent 68%
+    ),
+    radial-gradient(
+      900px 420px at 100% 0%,
+      rgba(124, 58, 237, 0.35),
       transparent 55%
     ),
     radial-gradient(
-      900px 500px at 0% 100%,
-      rgba(34, 211, 238, 0.15),
+      800px 400px at 0% 100%,
+      rgba(14, 165, 233, 0.2),
       transparent 50%
     ),
-    linear-gradient(165deg, var(--bg-deep) 0%, var(--bg-mid) 45%, #0c1222 100%);
+    linear-gradient(160deg, #070510 0%, #140a28 38%, #0c0518 100%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: -20% -10%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.12) 25%,
+    rgba(232, 121, 249, 0.15) 50%,
+    rgba(124, 58, 237, 0.1) 72%,
+    transparent 100%
+  );
+  filter: blur(40px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
 }
 
 #root {
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 code {

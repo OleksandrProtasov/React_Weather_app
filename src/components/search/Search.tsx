@@ -1,6 +1,11 @@
 import { useCallback, useState } from 'react';
 import AsyncSelect from 'react-select/async';
-import type { CSSObjectWithLabel, StylesConfig } from 'react-select';
+import { components as selectComponents } from 'react-select';
+import type {
+  ControlProps,
+  CSSObjectWithLabel,
+  StylesConfig,
+} from 'react-select';
 import { geocodeDirectUrl } from '../../config/api';
 import type { CityOption } from '../../types/search';
 import styles from './Search.module.css';
@@ -19,17 +24,17 @@ const selectStyles = {
   control: (base: CSSObjectWithLabel, state: { isFocused: boolean }) =>
     ({
       ...base,
-      minHeight: 48,
-      borderRadius: 14,
-      background: 'rgba(15, 23, 42, 0.65)',
+      minHeight: 44,
+      borderRadius: 9999,
+      background: 'rgba(255, 255, 255, 0.06)',
       borderColor: state.isFocused
-        ? 'rgba(167, 139, 250, 0.65)'
-        : 'rgba(148, 163, 184, 0.25)',
+        ? 'rgba(255, 255, 255, 0.28)'
+        : 'rgba(255, 255, 255, 0.14)',
       boxShadow: state.isFocused
-        ? '0 0 0 1px rgba(167, 139, 250, 0.35)'
+        ? '0 0 0 1px rgba(56, 189, 248, 0.35)'
         : 'none',
       '&:hover': {
-        borderColor: 'rgba(167, 139, 250, 0.45)',
+        borderColor: 'rgba(255, 255, 255, 0.22)',
       },
     }) as CSSObjectWithLabel,
   menuPortal: (base: CSSObjectWithLabel) =>
@@ -37,11 +42,11 @@ const selectStyles = {
   menu: (base: CSSObjectWithLabel) =>
     ({
       ...base,
-      borderRadius: 14,
+      borderRadius: 16,
       overflow: 'hidden',
-      background: 'rgba(15, 23, 42, 0.95)',
-      border: '1px solid rgba(148, 163, 184, 0.2)',
-      backdropFilter: 'blur(16px)',
+      background: 'rgba(18, 18, 22, 0.94)',
+      border: '1px solid rgba(255, 255, 255, 0.1)',
+      backdropFilter: 'blur(20px)',
       zIndex: 10000,
     }) as CSSObjectWithLabel,
   menuList: (base: CSSObjectWithLabel) =>
@@ -55,32 +60,65 @@ const selectStyles = {
       borderRadius: 10,
       cursor: 'pointer',
       backgroundColor: state.isSelected
-        ? 'rgba(167, 139, 250, 0.25)'
+        ? 'rgba(192, 132, 252, 0.22)'
         : state.isFocused
-          ? 'rgba(34, 211, 238, 0.12)'
+          ? 'rgba(56, 189, 248, 0.12)'
           : 'transparent',
-      color: '#f1f5f9',
+      color: '#ffffff',
     }) as CSSObjectWithLabel,
   singleValue: (base: CSSObjectWithLabel) =>
-    ({ ...base, color: '#f1f5f9' }) as CSSObjectWithLabel,
+    ({ ...base, color: '#ffffff' }) as CSSObjectWithLabel,
   input: (base: CSSObjectWithLabel) =>
-    ({ ...base, color: '#f1f5f9' }) as CSSObjectWithLabel,
+    ({ ...base, color: '#ffffff' }) as CSSObjectWithLabel,
   placeholder: (base: CSSObjectWithLabel) =>
-    ({ ...base, color: '#64748b' }) as CSSObjectWithLabel,
+    ({ ...base, color: 'rgba(255, 255, 255, 0.45)' }) as CSSObjectWithLabel,
   indicatorSeparator: () => ({ display: 'none' }) as CSSObjectWithLabel,
   dropdownIndicator: (base: CSSObjectWithLabel, state: { isFocused: boolean }) =>
     ({
       ...base,
-      color: state.isFocused ? '#a78bfa' : '#64748b',
-      '&:hover': { color: '#a78bfa' },
+      color: state.isFocused ? '#c084fc' : 'rgba(255,255,255,0.4)',
+      '&:hover': { color: '#c084fc' },
     }) as CSSObjectWithLabel,
   clearIndicator: (base: CSSObjectWithLabel) =>
     ({
       ...base,
-      color: '#64748b',
+      color: 'rgba(255,255,255,0.4)',
       '&:hover': { color: '#fb7185' },
     }) as CSSObjectWithLabel,
 } satisfies StylesConfig<CityOption, false>;
+
+function SearchGlyph() {
+  return (
+    <svg
+      className={styles.glyphSvg}
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm9 2-4.35-4.35"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ControlWithIcon(props: ControlProps<CityOption, false>) {
+  return (
+    <selectComponents.Control {...props}>
+      <span className={styles.glyph}>
+        <SearchGlyph />
+      </span>
+      {props.children}
+    </selectComponents.Control>
+  );
+}
 
 function hitToOption(hit: GeocodeHit): CityOption {
   const label = hit.state
@@ -94,9 +132,11 @@ function hitToOption(hit: GeocodeHit): CityOption {
 
 interface SearchProps {
   onSearchChange: (data: CityOption) => void;
+  /** Header layout: no label, pill search */
+  compact?: boolean;
 }
 
-export default function Search({ onSearchChange }: SearchProps) {
+export default function Search({ onSearchChange, compact }: SearchProps) {
   const [search, setSearch] = useState<CityOption | null>(null);
 
   const loadOptions = useCallback((inputValue: string) => {
@@ -131,13 +171,15 @@ export default function Search({ onSearchChange }: SearchProps) {
 
   return (
     <div className={styles.wrap}>
-      <label className={styles.label} htmlFor="city-search">
-        Search city
-      </label>
+      {!compact && (
+        <label className={styles.label} htmlFor="city-search">
+          Search city
+        </label>
+      )}
       <AsyncSelect<CityOption, false>
         inputId="city-search"
         instanceId="city-search"
-        placeholder="Type at least 2 letters…"
+        placeholder={compact ? 'Search location' : 'Type at least 2 letters…'}
         cacheOptions
         defaultOptions={false}
         loadOptions={loadOptions}
@@ -154,6 +196,7 @@ export default function Search({ onSearchChange }: SearchProps) {
             : 'No cities found'
         }
         loadingMessage={() => 'Searching…'}
+        components={{ Control: ControlWithIcon }}
       />
     </div>
   );

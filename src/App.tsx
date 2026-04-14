@@ -71,7 +71,7 @@ function App() {
   if (!hasRequiredEnv) {
     return (
       <div className="app">
-        <div className="env-warning glass-panel">
+        <div className="env-warning">
           <h1 className="env-warning__title">Configure API keys</h1>
           <p className="env-warning__text">
             Create a <code>.env</code> file in the project root with{' '}
@@ -85,34 +85,29 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app__glow app__glow--one" aria-hidden />
-      <div className="app__glow app__glow--two" aria-hidden />
-
-      <header className="app__header">
-        <div className="app__brand">
-          <span className="app__logo" aria-hidden>
-            ◎
-          </span>
-          <div>
-            <h1 className="app__title">Aurora Sky</h1>
-            <p className="app__tagline">Live weather, clean forecast</p>
+      <div className="app__shell">
+        <header className="app__header">
+          <div className="app__brand">
+            <span className="app__plus" aria-hidden>
+              +
+            </span>
+            <h1 className="app__title">Weather</h1>
           </div>
-        </div>
-      </header>
+          <div className="app__search-wrap">
+            <Search compact onSearchChange={handleOnSearchChange} />
+          </div>
+        </header>
 
-      <main className="app__main">
-        <section className="app__search-section glass-panel">
-          <Search onSearchChange={handleOnSearchChange} />
+        <main className="app__main">
           {error && (
             <p className="app__error" role="alert">
               {error}
             </p>
           )}
-        </section>
-
-        {currentWeather && <CurrentWeather data={currentWeather} />}
-        {forecast && <Forecast data={forecast} />}
-      </main>
+          {currentWeather && <CurrentWeather data={currentWeather} />}
+          {forecast && <Forecast data={forecast} />}
+        </main>
+      </div>
     </div>
   );
 }

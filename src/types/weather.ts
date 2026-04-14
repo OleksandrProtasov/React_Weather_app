@@ -21,8 +21,11 @@ export interface CurrentWeatherResponse {
 }
 
 export interface ForecastListItem {
+  /** Unix UTC seconds — used for labels and grouping */
+  dt?: number;
   weather: WeatherCondition[];
   main: {
+    temp?: number;
     temp_min: number;
     temp_max: number;
     feels_like: number;
